@@ -1,0 +1,38 @@
+---
+- name: Copy container to backend instance
+  hosts: backservers
+  become: yes
+
+  vars:
+    version: latest
+    name_docker_repo: frontend
+
+  tasks:
+  - name: login to aws ecr
+    shell: /usr/local/bin/aws ecr get-login-password --region us-east-2 | sudo docker login --username AWS --password-stdin 059556936706.dkr.ecr.us-east-2.amazonaws.c$
+
+  - name: pull docker image from ecr
+    shell: docker pull 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:${VERSION}
+
+  - name: install docker-py for ansible modules
+    pip:
+      name: python
+
+  - name: run docker container with python app
+    docker_container:
+      name: app
+      image: 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:${VERSION}
+      state: started
+      published_ports:
+      - "80:80"
+      tty: true
+      detach: true
+
+  - name: Wait for the Application (80) port to become open.
+    wait_for:
+      host: 127.0.0.1
+      port: "{{ item }}"
+      timeout: 420
+      delay: 15
+    with_items:
+    - 80
