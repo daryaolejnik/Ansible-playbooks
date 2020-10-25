@@ -9,7 +9,7 @@
 
   tasks:
   - name: login to aws ecr
-    shell: /usr/local/bin/aws ecr get-login-password --region us-east-2 | sudo docker login --username AWS --password-stdin 059556936706.dkr.ecr.us-east-2.amazonaws.c$
+    shell: /usr/local/bin/aws ecr get-login-password --region us-east-2 | sudo docker login --username AWS --password-stdin 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}
 
   - name: pull docker image from ecr
     shell: docker pull 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:${VERSION}
