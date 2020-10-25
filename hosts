@@ -1,3 +1,2 @@
 [backservers]
 backend1 ansible_ssh_host=192.168.1.92 ansible_user=centos
-#ansible_ssh_private_key_file=/home/centos/.ssh/jenkins.pem
