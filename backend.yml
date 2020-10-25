@@ -12,7 +12,7 @@
     shell: /usr/local/bin/aws ecr get-login-password --region us-east-2 | sudo docker login --username AWS --password-stdin 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}
 
   - name: pull docker image from ecr
-    shell: docker pull 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:${VERSION}
+    shell: docker pull 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:"{{ VERSION }}"
 
   - name: install docker-py for ansible modules
     pip:
@@ -21,7 +21,7 @@
   - name: run docker container with python app
     docker_container:
       name: app
-      image: 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:${VERSION}
+      image: 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:"{{ VERSION }}"
       state: started
       published_ports:
       - "80:80"
