@@ -21,7 +21,7 @@
   - name: run docker container with python app
     docker_container:
       name: app
-      image: 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:"{{ VERSION }}"
+      image: 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:{{ VERSION }}
       state: started
       published_ports:
       - "80:80"
