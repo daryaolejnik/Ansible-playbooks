@@ -3,8 +3,7 @@
   hosts: backservers
   become: yes
 
-  vars:
-    version: latest
+  vars:   
     name_docker_repo: backend
 
   tasks:
