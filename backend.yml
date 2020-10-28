@@ -1,5 +1,5 @@
 ---
-- name: Copy container to backend instance
+- name: Deploy to backend instance
   hosts: backservers
   become: yes
 
