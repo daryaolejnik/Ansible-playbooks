@@ -31,7 +31,7 @@
       - "80:80"
       tty: true
       detach: true
-    when: info_container.exists==False
+    when: info_container.exists == "False"
 
   - name: Wait for the Application (80) port to become open.
     wait_for:
