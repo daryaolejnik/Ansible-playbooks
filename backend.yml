@@ -5,7 +5,7 @@
 
   vars:
     version: latest
-    name_docker_repo: frontend
+    name_docker_repo: backend
 
   tasks:
   - name: login to aws ecr
