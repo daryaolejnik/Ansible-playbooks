@@ -10,13 +10,13 @@
   - name: login to aws ecr
     shell: /usr/local/bin/aws ecr get-login-password --region us-east-2 | sudo docker login --username AWS --password-stdin 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}
   
-  - name: Get infos on container
-    docker_container_info:
-      name: app
-    register: info_container
+#  - name: Get infos on container
+#    docker_container_info:
+#      name: app
+#    register: info_container
   
-  - name: pull docker image from ecr
-    shell: docker pull 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:"{{ VERSION }}"
+#  - name: pull docker image from ecr
+#    shell: docker pull 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:"{{ VERSION }}"
 
   - name: install docker-py for ansible modules
     pip:
@@ -26,6 +26,7 @@
     docker_container:
       name: app
       image: 059556936706.dkr.ecr.us-east-2.amazonaws.com/{{ name_docker_repo }}:{{ VERSION }}
+      pull: yes
       state: started
       published_ports:
       - "80:80"
@@ -34,7 +35,7 @@
       network_mode: bridge
       tty: true
       detach: true
-    when: info_container.exists == "False"
+#    when: info_container.exists == "False"
 
   - name: Wait for the Application (80) port to become open.
     wait_for:
