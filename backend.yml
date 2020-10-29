@@ -29,6 +29,9 @@
       state: started
       published_ports:
       - "80:80"
+      log_driver: json-file
+      restart_policy: always
+      network_mode: bridge
       tty: true
       detach: true
     when: info_container.exists == "False"
