@@ -40,7 +40,7 @@
   - name: Get infos on container
     docker_container_info:
       name: app
-    register: info_container
+    register: result
     
   - name: Does container exist?
     ansible.builtin.debug:
